@@ -1,37 +1,37 @@
 import java.util.ArrayList;
 
-public class Vertice<TIPO> {
-    private TIPO dado;
-    private ArrayList<Aresta<TIPO>> arestasEntrada;
-    private ArrayList<Aresta<TIPO>> arestasSaida;
+public class Vertice<Obstaculos> {
+    private Obstaculos obstaculos;
+    private ArrayList<Aresta<Obstaculos>> arestasEntrada;
+    private ArrayList<Aresta<Obstaculos>> arestasSaida;
     
-    public Vertice(TIPO valor){
-        this.dado = valor;
-        this.arestasEntrada = new ArrayList<Aresta<TIPO>>();
-        this.arestasSaida = new ArrayList<Aresta<TIPO>>();
+    public Vertice(Obstaculos valor){
+        this.obstaculos = valor;
+        this.arestasEntrada = new ArrayList<Aresta<Obstaculos>>();
+        this.arestasSaida = new ArrayList<Aresta<Obstaculos>>();
     }
 
-    public TIPO getDado() {
-        return dado;
+    public Obstaculos getDado() {
+        return obstaculos;
     }
 
-    public void setDado(TIPO dado) {
-        this.dado = dado;
+    public void setDado(Obstaculos obstaculos) {
+        this.obstaculos = obstaculos;
     }
     
-    public void adicionarArestaEntrada(Aresta<TIPO> aresta){
+    public void adicionarArestaEntrada(Aresta<Obstaculos> aresta){
         this.arestasEntrada.add(aresta);
     }
     
-    public void adicionarArestaSaida(Aresta<TIPO> aresta){
+    public void adicionarArestaSaida(Aresta<Obstaculos> aresta){
         this.arestasSaida.add(aresta);
     }
 
-    public ArrayList<Aresta<TIPO>> getArestasEntrada() {
+    public ArrayList<Aresta<Obstaculos>> getArestasEntrada() {
         return arestasEntrada;
     }
 
-    public ArrayList<Aresta<TIPO>> getArestasSaida() {
+    public ArrayList<Aresta<Obstaculos>> getArestasSaida() {
         return arestasSaida;
     }
     
