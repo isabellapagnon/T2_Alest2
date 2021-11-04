@@ -10,7 +10,7 @@ public class App {
 
         Path path = Paths.get("oito_enunciado.txt");
         String aux[];
-        Grafo<Minions> grafo = new Grafo<Minions>();
+        Grafo<Obstaculos> grafo = new Grafo<Obstaculos>();
 
         try (BufferedReader reader = Files.newBufferedReader(path, Charset.defaultCharset())) {
 
@@ -23,13 +23,17 @@ public class App {
                     break;
                 }
 
-               Minions minions = new Minions(aux[0]);
-               grafo.adicionarVertice(minions);
+                Obstaculos obstaculo = new Obstaculos(aux[0]);
+                Obstaculos obstaculo2 = new Obstaculos(aux[1]);
 
-               Minions minions2 = new Minions(aux[1]);
-               grafo.adicionarVertice(minions2);
+                grafo.adicionarVertice(obstaculo);
+                grafo.adicionarVertice(obstaculo2);
+            
+                grafo.adicionarAresta(obstaculo.getTime(), obstaculo, obstaculo2);
 
-               grafo.adicionarAresta(minions.getTime(), minions, minions2);
+                grafo.contains(obstaculo);
+                grafo.contains(obstaculo2);
+
 
             }
             
