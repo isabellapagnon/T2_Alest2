@@ -10,7 +10,7 @@ public class App {
 
         Path path = Paths.get("oito_enunciado.txt");
         String aux[];
-        Grafo<Obstaculos> grafo = new Grafo<Obstaculos>();
+        Grafo grafo = new Grafo();
 
         try (BufferedReader reader = Files.newBufferedReader(path, Charset.defaultCharset())) {
 
@@ -19,27 +19,23 @@ public class App {
             while ((line = reader.readLine()) != null) {
                 aux = line.split(" -> ");
 
-                if(line.equals("}")){
+                if (line.equals("}")) {
                     break;
                 }
 
                 Obstaculos obstaculo = new Obstaculos(aux[0]);
                 Obstaculos obstaculo2 = new Obstaculos(aux[1]);
 
-                grafo.adicionarVertice(obstaculo);
-                grafo.adicionarVertice(obstaculo2);
-            
-                grafo.adicionarAresta(obstaculo.getTime(), obstaculo, obstaculo2);
-
-                grafo.contains(obstaculo);
-                grafo.contains(obstaculo2);
-
+                grafo.adicionarAresta((grafo.adicionarVertice(obstaculo).getDado()), (grafo.adicionarVertice(obstaculo2).getDado()));
 
             }
-            
+
         } catch (IOException e) {
             System.err.format("Erro na leitura do arquivo: ", e);
         }
+
+        System.out.println("vertices: " + grafo.sizeVertice());
+        System.out.println("Arestas: " + grafo.sizeArestas());
 
     }
 
