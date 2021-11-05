@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 public class App {
     public static void main(String[] args) {
 
-        Path path = Paths.get("oito_enunciado.txt");
+        Path path = Paths.get("dez.txt");
         String aux[];
         Grafo grafo = new Grafo();
 
@@ -36,6 +36,9 @@ public class App {
 
         System.out.println("vertices: " + grafo.sizeVertice());
         System.out.println("Arestas: " + grafo.sizeArestas());
+
+        System.out.println(grafo.busca0Entrada());
+        // System.out.println(Collections.sort(grafo.busca0Entrada()));
 
     }
 
