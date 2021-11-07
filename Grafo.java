@@ -56,26 +56,6 @@ public class Grafo {
         return arestas.size();
     }
 
-    public void buscaEmLargura() {
-        ArrayList<Vertice<Obstaculos>> marcados = new ArrayList<Vertice<Obstaculos>>();
-        ArrayList<Vertice<Obstaculos>> fila = new ArrayList<Vertice<Obstaculos>>();
-        Vertice<Obstaculos> atual = this.vertices.get(0);
-        marcados.add(atual);
-        System.out.println(atual.getDado().getName());
-        fila.add(atual);
-        while (fila.size() > 0) {
-            Vertice<Obstaculos> visitado = fila.get(0);
-            for (int i = 0; i < visitado.getArestasSaida().size(); i++) {
-                Vertice<Obstaculos> proximo = visitado.getArestasSaida().get(i).getFim();
-                if (!marcados.contains(proximo)) { // se o vértice ainda não foi marcado
-                    marcados.add(proximo);
-                    System.out.println(proximo.getDado().getName());
-                    fila.add(proximo);
-                }
-            }
-            fila.remove(0);
-        }
-    }
 
     // Começa com os obstáculos que não tem nenhuma aresta de entrada
     // Minion em todos
@@ -106,14 +86,14 @@ public class Grafo {
     }
 
     public ArrayList<Vertice<Obstaculos>> sort(ArrayList<Vertice<Obstaculos>> obstaculos) {
-        Obstaculos temp;
+        Vertice<Obstaculos> temp;
         for (int i = 0; i < obstaculos.size(); i++) {
             for (int j = i + 1; j < obstaculos.size(); j++) {
                 if (obstaculos.get(j).getDado().getName().compareTo(obstaculos.get(i).getDado().getName()) < 0) {
                     // swap elements
-                    temp = obstaculos.get(i).getDado();
-                    obstaculos.get(i).setDado(obstaculos.get(j).getDado());
-                    obstaculos.get(j).setDado(temp);
+                    temp = obstaculos.get(i);
+                    obstaculos.get(i).setDadosAndArestas(obstaculos.get(j).getDado(), obstaculos.get(j).getArestasEntrada(), obstaculos.get(j).getArestasSaida());
+                    obstaculos.get(j).setDadosAndArestas(temp.getDado(), temp.getArestasEntrada(), temp.getArestasSaida());
                 }
             }
         }
@@ -121,6 +101,50 @@ public class Grafo {
             System.out.println(obstaculos.get(i).getDado().getName());
         }
         return obstaculos;
+    }
+
+    public void caminhamento(){
+        ArrayList<Vertice<Obstaculos>> inicio = new ArrayList<Vertice<Obstaculos>>();
+        inicio = sort(busca0Entrada());
+        ArrayList<Vertice<Obstaculos>> marcados = new ArrayList<Vertice<Obstaculos>>();
+        ArrayList<Vertice<Obstaculos>> fila = new ArrayList<Vertice<Obstaculos>>();
+        Vertice<Obstaculos> atual = inicio.get(0);
+        marcados.add(atual);
+        System.out.println(atual.getDado().getName());
+        fila.add(atual);
+        while (fila.size() > 0) {
+            Vertice<Obstaculos> visitado = fila.get(0);
+            for (int i = 0; i < visitado.getArestasSaida().size(); i++) {
+                Vertice<Obstaculos> proximo = visitado.getArestasSaida().get(i).getFim();
+                if (!marcados.contains(proximo)) { // se o vértice ainda não foi marcado
+                    marcados.add(proximo);
+                    System.out.println(proximo.getDado().getName());
+                    fila.add(proximo);
+                }
+            }
+            fila.remove(0);
+        }
+    }
+
+    public void buscaEmLargura() {
+        ArrayList<Vertice<Obstaculos>> marcados = new ArrayList<Vertice<Obstaculos>>();
+        ArrayList<Vertice<Obstaculos>> fila = new ArrayList<Vertice<Obstaculos>>();
+        Vertice<Obstaculos> atual = this.vertices.get(0);
+        marcados.add(atual);
+        System.out.println(atual.getDado().getName());
+        fila.add(atual);
+        while (fila.size() > 0) {
+            Vertice<Obstaculos> visitado = fila.get(0);
+            for (int i = 0; i < visitado.getArestasSaida().size(); i++) {
+                Vertice<Obstaculos> proximo = visitado.getArestasSaida().get(i).getFim();
+                if (!marcados.contains(proximo)) { // se o vértice ainda não foi marcado
+                    marcados.add(proximo);
+                    System.out.println(proximo.getDado().getName());
+                    fila.add(proximo);
+                }
+            }
+            fila.remove(0);
+        }
     }
 
 }

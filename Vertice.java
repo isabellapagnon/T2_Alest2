@@ -4,8 +4,8 @@ public class Vertice<Obstaculos> {
     private Obstaculos obstaculos;
     private ArrayList<Aresta<Obstaculos>> arestasEntrada;
     private ArrayList<Aresta<Obstaculos>> arestasSaida;
-    
-    public Vertice(Obstaculos valor){
+
+    public Vertice(Obstaculos valor) {
         this.obstaculos = valor;
         this.arestasEntrada = new ArrayList<Aresta<Obstaculos>>();
         this.arestasSaida = new ArrayList<Aresta<Obstaculos>>();
@@ -18,12 +18,12 @@ public class Vertice<Obstaculos> {
     public void setDado(Obstaculos obstaculos) {
         this.obstaculos = obstaculos;
     }
-    
-    public void adicionarArestaEntrada(Aresta<Obstaculos> aresta){
+
+    public void adicionarArestaEntrada(Aresta<Obstaculos> aresta) {
         this.arestasEntrada.add(aresta);
     }
-    
-    public void adicionarArestaSaida(Aresta<Obstaculos> aresta){
+
+    public void adicionarArestaSaida(Aresta<Obstaculos> aresta) {
         this.arestasSaida.add(aresta);
     }
 
@@ -34,6 +34,13 @@ public class Vertice<Obstaculos> {
     public ArrayList<Aresta<Obstaculos>> getArestasSaida() {
         return arestasSaida;
     }
-    
-    
+
+    public void setDadosAndArestas(Obstaculos obstaculos, ArrayList<Aresta<Obstaculos>> arestaEntrada,
+                                    ArrayList<Aresta<Obstaculos>> arestaSaida) {
+        this.obstaculos = obstaculos;
+        this.arestasEntrada  = arestaEntrada;
+        this.arestasSaida = arestaSaida;
+
+    }
+
 }
