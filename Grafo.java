@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Grafo {
     private ArrayList<Vertice<Obstaculos>> vertices;
@@ -98,10 +99,28 @@ public class Grafo {
         for (int i = 0; i < vertices.size(); i++) {
             if (vertices.get(i).getArestasEntrada().size() == 0) {
                 aux.add(vertices.get(i));
-                System.out.println(vertices.get(i).getDado().getName());
+                //System.out.println(vertices.get(i).getDado().getName());
             }
         }
         return aux;
+    }
+
+    public ArrayList<Vertice<Obstaculos>> sort(ArrayList<Vertice<Obstaculos>> obstaculos) {
+        Obstaculos temp;
+        for (int i = 0; i < obstaculos.size(); i++) {
+            for (int j = i + 1; j < obstaculos.size(); j++) {
+                if (obstaculos.get(j).getDado().getName().compareTo(obstaculos.get(i).getDado().getName()) < 0) {
+                    // swap elements
+                    temp = obstaculos.get(i).getDado();
+                    obstaculos.get(i).setDado(obstaculos.get(j).getDado());
+                    obstaculos.get(j).setDado(temp);
+                }
+            }
+        }
+        for(int i = 0; i < obstaculos.size(); i++){
+            System.out.println(obstaculos.get(i).getDado().getName());
+        }
+        return obstaculos;
     }
 
 }
