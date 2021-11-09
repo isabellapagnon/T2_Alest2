@@ -43,4 +43,32 @@ public class Vertice<Obstaculos> {
 
     }
 
+    // public void setDadosAndArestas2(Obstaculos obstaculos, ArrayList<Aresta<Obstaculos>> arestaEntradaa,
+    //                                 ArrayList<Aresta<Obstaculos>> arestaSaidaa) {
+    //     setDado(obstaculos);
+    //     setArestaEntrada(arestaEntradaa);
+    //     setArestaSaida(arestaSaidaa);
+
+    // }
+
+    // public void setArestaEntrada(ArrayList<Aresta<Obstaculos>> arestaEntradaa){
+    //     for(int i = 0; i < arestasEntrada.size(); i++){
+    //         arestasEntrada.remove(i);
+    //     }
+
+    //     for(int i = 0; i < arestaEntradaa.size(); i++){
+    //         arestasEntrada.add(arestaEntradaa.get(i));
+    //     }
+    // }
+
+    // public void setArestaSaida(ArrayList<Aresta<Obstaculos>> arestaSaidaa){
+    //     for(int i = 0; i < arestasSaida.size(); i++){
+    //         arestasSaida.remove(i);
+    //     }
+
+    //     for(int i = 0; i < arestaSaidaa.size(); i++){
+    //         arestasSaida.add(arestaSaidaa.get(i));
+    //     }
+    // }
+
 }

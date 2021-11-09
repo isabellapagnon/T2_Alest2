@@ -38,7 +38,7 @@ public class App {
         System.out.println("Arestas: " + grafo.sizeArestas());
 
         System.out.println(grafo.busca0Entrada());
-        grafo.sort(grafo.busca0Entrada());
+        grafo.sort2(grafo.busca0Entrada());
 
     }
 

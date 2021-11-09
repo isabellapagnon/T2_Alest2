@@ -66,14 +66,6 @@ public class Grafo {
     // caso não tenha obstaculos, esperar todos os minios terminarem para poder ir
     // pro proximo
 
-    // public Obstaculos sort(ArrayList<Vertice<Obstaculos>> freeObstacles){
-
-    // freeObstacles.forEach(obstaculo -> {
-    // System.out.println(obstaculo.getDado().getName());
-    // });
-    // return null;
-    // }
-
     public ArrayList<Vertice<Obstaculos>> busca0Entrada() {
         ArrayList<Vertice<Obstaculos>> aux = new ArrayList<Vertice<Obstaculos>>();
         for (int i = 0; i < vertices.size(); i++) {
@@ -87,18 +79,59 @@ public class Grafo {
 
     public ArrayList<Vertice<Obstaculos>> sort(ArrayList<Vertice<Obstaculos>> obstaculos) {
         Vertice<Obstaculos> temp;
+        for (int j = 0; j < obstaculos.size(); j++) {
+            for (int i = j + 1; i < obstaculos.size(); i++) {
+                if (obstaculos.get(i).getDado().getName().compareTo(obstaculos.get(j).getDado().getName()) < 0) {
+                    // swap elements
+                    temp = obstaculos.get(j);
+                    obstaculos.get(j).setDadosAndArestas(obstaculos.get(i).getDado(), obstaculos.get(i).getArestasEntrada(), obstaculos.get(i).getArestasSaida());
+                    obstaculos.get(i).setDadosAndArestas(temp.getDado(), temp.getArestasEntrada(), temp.getArestasSaida());
+                }
+            }
+        }
+        for(int x = 0; x < obstaculos.size(); x++){
+            System.out.println(obstaculos.get(x).getDado().getName());
+            // System.out.println("----");
+            // System.out.println(obstaculos.get(i).getArestasSaida());
+            // System.out.println("-------------------");
+        }
+        return obstaculos;
+    }
+
+    public ArrayList<Vertice<Obstaculos>> sort2(ArrayList<Vertice<Obstaculos>> obstaculos) {
+        Obstaculos temp;
+        ArrayList<Aresta<Obstaculos>> arestaEntrada;
+        ArrayList<Aresta<Obstaculos>> arestaSaida;
+
+        Obstaculos temp2;
+        ArrayList<Aresta<Obstaculos>> arestaEntrada2;
+        ArrayList<Aresta<Obstaculos>> arestaSaida2;
+
         for (int i = 0; i < obstaculos.size(); i++) {
             for (int j = i + 1; j < obstaculos.size(); j++) {
                 if (obstaculos.get(j).getDado().getName().compareTo(obstaculos.get(i).getDado().getName()) < 0) {
                     // swap elements
-                    temp = obstaculos.get(i);
-                    obstaculos.get(i).setDadosAndArestas(obstaculos.get(j).getDado(), obstaculos.get(j).getArestasEntrada(), obstaculos.get(j).getArestasSaida());
-                    obstaculos.get(j).setDadosAndArestas(temp.getDado(), temp.getArestasEntrada(), temp.getArestasSaida());
+                     temp = obstaculos.get(i).getDado();
+                     arestaEntrada = obstaculos.get(i).getArestasEntrada();
+                     arestaSaida = obstaculos.get(i).getArestasSaida();
+
+                     temp2 = obstaculos.get(j).getDado();
+                     arestaEntrada2 = obstaculos.get(j).getArestasEntrada();
+                     arestaSaida2 = obstaculos.get(j).getArestasSaida();
+
+
+                     obstaculos.get(i).setDadosAndArestas(temp2, arestaEntrada2, arestaSaida2);
+                     obstaculos.get(j).setDadosAndArestas(temp, arestaEntrada, arestaSaida);
+                    //  obstaculos.get(i).setDado(obstaculos.get(j).getDado());
+                    //  obstaculos.get(j).setDado(temp);
                 }
             }
         }
         for(int i = 0; i < obstaculos.size(); i++){
             System.out.println(obstaculos.get(i).getDado().getName());
+            System.out.println("--");
+            System.out.println(obstaculos.get(i).getArestasSaida());
+            System.out.println("-----");
         }
         return obstaculos;
     }
