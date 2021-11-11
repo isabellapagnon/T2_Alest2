@@ -180,4 +180,54 @@ public class Grafo {
         }
     }
 
+        public ArrayList<Vertice<Obstaculos>> buscaFilhos(Vertice<Obstaculos> obstaculo) {
+        ArrayList<Vertice<Obstaculos>> filhosDisponiveis = new ArrayList<Vertice<Obstaculos>>();
+        
+        sort3(obstaculo.getArestasSaida());
+        
+        return filhosDisponiveis;
+    }
+
+    public ArrayList<Aresta<Obstaculos>> sort3(ArrayList<Aresta<Obstaculos>> obstaculos) {
+        Obstaculos temp;
+        ArrayList<Aresta<Obstaculos>> arestaEntrada;
+        ArrayList<Aresta<Obstaculos>> arestaSaida;
+
+        Obstaculos temp2;
+        ArrayList<Aresta<Obstaculos>> arestaEntrada2;
+        ArrayList<Aresta<Obstaculos>> arestaSaida2;
+
+        for (int i = 0; i < obstaculos.size(); i++) {
+            for (int j = i + 1; j < obstaculos.size(); j++) {
+                if (obstaculos.get(j).getFim().getDado().getName().compareTo(obstaculos.get(i).getFim().getDado().getName()) < 0) {
+                    // swap elements
+                    temp = obstaculos.get(i).getFim().getDado();
+                    //System.out.println(temp.getName());
+                    arestaEntrada = obstaculos.get(i).getFim().getArestasEntrada();
+                    arestaSaida = obstaculos.get(i).getFim().getArestasSaida();
+
+                    temp2 = obstaculos.get(j).getFim().getDado();
+                    arestaEntrada2 = obstaculos.get(j).getFim().getArestasEntrada();
+                    arestaSaida2 = obstaculos.get(j).getFim().getArestasSaida();
+
+
+                    obstaculos.get(i).getFim().setDadosAndArestas(temp2, arestaEntrada2, arestaSaida2);
+                    obstaculos.get(j).getFim().setDadosAndArestas(temp, arestaEntrada, arestaSaida);
+                    //  obstaculos.get(i).setDado(obstaculos.get(j).getDado());
+                    //  obstaculos.get(j).setDado(temp);
+                }
+            }
+        }
+                for(int i = 0; i < obstaculos.size(); i++){
+                    System.out.println(obstaculos.get(i).getFim().getDado().getName());
+                    System.out.println("--");
+                    System.out.println(obstaculos.get(i).getFim().getArestasSaida());
+                    System.out.println("-----");
+                }
+            
+        
+        return obstaculos;
+    }
+
+
 }
