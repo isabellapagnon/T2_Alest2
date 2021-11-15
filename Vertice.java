@@ -35,13 +35,25 @@ public class Vertice<Obstaculos> {
         return arestasSaida;
     }
 
-    public void deleteArestaSaida(){
+    public void deleteVerticeFromArestaEntrada(Vertice<Obstaculos> aux){
         int i = 0;
-        while(i < arestasSaida.size()){
-            arestasSaida.remove(0);
+        while(i < arestasEntrada.size()){
+            if(arestasEntrada.get(i).getInicio() == aux){
+                arestasEntrada.remove(i);
+            }
+            i++;
         }
     }
 
+    public void verify(ArrayList<Vertice<Obstaculos>> excluded){
+        int i = 0;
+        while(i < arestasEntrada.size()){
+            if(excluded.contains(arestasEntrada.get(i).getInicio())){
+                arestasEntrada.remove(i);
+            }
+            i++;
+        }
+    }
 
     public void setDadosAndArestas(Obstaculos obstaculos, ArrayList<Aresta<Obstaculos>> arestaEntrada,
                                     ArrayList<Aresta<Obstaculos>> arestaSaida) {

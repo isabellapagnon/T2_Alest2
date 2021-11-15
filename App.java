@@ -34,7 +34,7 @@ public class App {
             System.err.format("Erro na leitura do arquivo: ", e);
         }
 
-        grafo.minionsAgindo(3);
+        System.out.println("tempo: " + grafo.minionsAgindo(3));
 
     }
 

@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Grafo {
     private ArrayList<Vertice<Obstaculos>> vertices;
@@ -102,9 +101,9 @@ public class Grafo {
                 }
             }
         }
-        for (int x = 0; x < obstaculos.size(); x++) {
-            System.out.println(obstaculos.get(x).getDado().getName());
-        }
+        // for (int x = 0; x < obstaculos.size(); x++) {
+        //     System.out.println(obstaculos.get(x).getDado().getName());
+        // }
         return obstaculos;
     }
 
@@ -135,12 +134,12 @@ public class Grafo {
                 }
             }
         }
-        for (int i = 0; i < obstaculos.size(); i++) {
-            System.out.println(obstaculos.get(i).getDado().getName());
-            System.out.println("--");
-            System.out.println(obstaculos.get(i).getArestasSaida());
-            System.out.println("-----");
-        }
+        // for (int i = 0; i < obstaculos.size(); i++) {
+        //     System.out.println(obstaculos.get(i).getDado().getName());
+        //     System.out.println("--");
+        //     System.out.println(obstaculos.get(i).getArestasSaida());
+        //     System.out.println("-----");
+        // }
         return obstaculos;
     }
 
@@ -182,12 +181,12 @@ public class Grafo {
                 }
             }
         }
-        for (int i = 0; i < obstaculos.size(); i++) {
-            System.out.println(obstaculos.get(i).getFim().getDado().getName());
-            System.out.println("--");
-            System.out.println(obstaculos.get(i).getFim().getArestasSaida());
-            System.out.println("-----");
-        }
+        // for (int i = 0; i < obstaculos.size(); i++) {
+        //     System.out.println(obstaculos.get(i).getFim().getDado().getName());
+        //     System.out.println("--");
+        //     System.out.println(obstaculos.get(i).getFim().getArestasSaida());
+        //     System.out.println("-----");
+        // }
 
         return obstaculos;
     }
@@ -210,12 +209,15 @@ public class Grafo {
         return -1;
     }
 
-    public void minionsAgindo(int quantidadeDeMinions) {
-        int tempo;
+    public int minionsAgindo(int quantidadeDeMinions) {
+        int tempo = 0;
+        int tempoTotal = 0;
         Vertice<Obstaculos> aux;
+        ArrayList<Aresta<Obstaculos>> arestasDeSaida;
         ArrayList<Vertice<Obstaculos>> disponiveis = new ArrayList<Vertice<Obstaculos>>();
         disponiveis = sort2(busca0Entrada());
         ArrayList<Vertice<Obstaculos>> working = new ArrayList<Vertice<Obstaculos>>();
+        ArrayList<Vertice<Obstaculos>> excluded = new ArrayList<Vertice<Obstaculos>>();
         //ArrayList<Integer> tempo = new ArrayList<Integer>();
 
         while (vertices.size() > 0) {
@@ -235,13 +237,58 @@ public class Grafo {
             // chegou no obstaculo mais rapido
             tempo = working.get(0).getDado().getTime();
             aux = working.get(0);
-            vertices.remove(working.remove(0));
-
+            working.remove(0);
+            tempoTotal = tempoTotal + tempo;
+            setarTempo(working, tempo);
+            arestasDeSaida = vertices.get(getIndexByObject(aux)).getArestasSaida();
+            deleteArestasDeEntradasDasArestasDeSaida(arestasDeSaida, aux);
+            vertices.remove(aux);
+            excluded.add(aux);
+            verify(excluded);
+            
 
             disponiveis = sort2(disponiveisSemWorking(working));
             sort2(working);
         }   
+        // deletar a aresta de entrada x que é a aresta de saida de x
+        System.out.println("foiiii");
+        return tempoTotal;
 
+    }
+
+    private void setarTempo(ArrayList<Vertice<Obstaculos>> working, int tempo){
+        int t = 0;
+        for(int i = 0; i < working.size(); i++){
+            t = working.get(i).getDado().getTime();
+            working.get(i).getDado().setTime(t - tempo);
+        }
+
+    }
+
+
+    public int getIndexByObject(Vertice<Obstaculos> aux){
+        for(int i = 0; i<vertices.size(); i++){
+            if(vertices.get(i) == aux){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void deleteArestasDeEntradasDasArestasDeSaida(ArrayList<Aresta<Obstaculos>> arestasDeSaida, Vertice<Obstaculos> aux1){
+        int aux;
+        for(int i = 0; i < arestasDeSaida.size(); i++){
+            aux = getIndexByObject(arestasDeSaida.get(i).getFim());
+            vertices.get(aux).deleteVerticeFromArestaEntrada(aux1);
+        }
+
+    }
+
+    public void verify(ArrayList<Vertice<Obstaculos>> excluded){
+    
+        for(int i = 0; i< vertices.size(); i++){
+            vertices.get(i).verify(excluded);
+        }
     }
 
     private int calculoMinionsVsDisponiveis(int tamanhoDisponiveis, int minions){
