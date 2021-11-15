@@ -35,6 +35,14 @@ public class Vertice<Obstaculos> {
         return arestasSaida;
     }
 
+    public void deleteArestaSaida(){
+        int i = 0;
+        while(i < arestasSaida.size()){
+            arestasSaida.remove(0);
+        }
+    }
+
+
     public void setDadosAndArestas(Obstaculos obstaculos, ArrayList<Aresta<Obstaculos>> arestaEntrada,
                                     ArrayList<Aresta<Obstaculos>> arestaSaida) {
         this.obstaculos = obstaculos;
