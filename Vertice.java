@@ -63,32 +63,16 @@ public class Vertice<Obstaculos> {
 
     }
 
-    // public void setDadosAndArestas2(Obstaculos obstaculos, ArrayList<Aresta<Obstaculos>> arestaEntradaa,
-    //                                 ArrayList<Aresta<Obstaculos>> arestaSaidaa) {
-    //     setDado(obstaculos);
-    //     setArestaEntrada(arestaEntradaa);
-    //     setArestaSaida(arestaSaidaa);
+    public void printArestasEntrada(){
+        for(int i = 0; i<arestasEntrada.size(); i++){
+            System.out.println(arestasEntrada.get(i).getInicio().getDado());
+        }
+    }
 
-    // }
-
-    // public void setArestaEntrada(ArrayList<Aresta<Obstaculos>> arestaEntradaa){
-    //     for(int i = 0; i < arestasEntrada.size(); i++){
-    //         arestasEntrada.remove(i);
-    //     }
-
-    //     for(int i = 0; i < arestaEntradaa.size(); i++){
-    //         arestasEntrada.add(arestaEntradaa.get(i));
-    //     }
-    // }
-
-    // public void setArestaSaida(ArrayList<Aresta<Obstaculos>> arestaSaidaa){
-    //     for(int i = 0; i < arestasSaida.size(); i++){
-    //         arestasSaida.remove(i);
-    //     }
-
-    //     for(int i = 0; i < arestaSaidaa.size(); i++){
-    //         arestasSaida.add(arestaSaidaa.get(i));
-    //     }
-    // }
+    public void printArestasSaida(){
+        for(int i = 0; i<arestasSaida.size(); i++){
+            System.out.println(arestasSaida.get(i).getFim().getDado());
+        }
+    }
 
 }
