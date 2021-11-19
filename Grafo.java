@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class Grafo {
     private ArrayList<Vertice<Obstaculos>> vertices;
@@ -56,14 +54,6 @@ public class Grafo {
         return null;
     }
 
-    public int sizeVertice() {
-        return vertices.size();
-    }
-
-    public int sizeArestas() {
-        return arestas.size();
-    }
-
     public ArrayList<Vertice<Obstaculos>> busca0Entrada() {
         ArrayList<Vertice<Obstaculos>> aux = new ArrayList<Vertice<Obstaculos>>();
         for (int i = 0; i < vertices.size(); i++) {
@@ -83,43 +73,6 @@ public class Grafo {
         }
         return aux;
     }
-
-    public ArrayList<Vertice<Obstaculos>> sort2(ArrayList<Vertice<Obstaculos>> obstaculos) {
-        Obstaculos temp;
-        ArrayList<Aresta<Obstaculos>> arestaEntrada;
-        ArrayList<Aresta<Obstaculos>> arestaSaida;
-
-        Obstaculos temp2;
-        ArrayList<Aresta<Obstaculos>> arestaEntrada2;
-        ArrayList<Aresta<Obstaculos>> arestaSaida2;
-
-        for (int i = 0; i < obstaculos.size(); i++) {
-            for (int j = i + 1; j < obstaculos.size(); j++) {
-                if (obstaculos.get(j).getDado().getName().compareTo(obstaculos.get(i).getDado().getName()) < 0) {
-                    // swap elements
-                    temp = obstaculos.get(i).getDado();
-                    arestaEntrada = obstaculos.get(i).getArestasEntrada();
-                    arestaSaida = obstaculos.get(i).getArestasSaida();
-
-                    temp2 = obstaculos.get(j).getDado();
-                    arestaEntrada2 = obstaculos.get(j).getArestasEntrada();
-                    arestaSaida2 = obstaculos.get(j).getArestasSaida();
-
-                    obstaculos.get(i).setDadosAndArestas(temp2, arestaEntrada2, arestaSaida2);
-                    obstaculos.get(j).setDadosAndArestas(temp, arestaEntrada, arestaSaida);
-
-                }
-            }
-        }
-        return obstaculos;
-    }
-
-    // private static Comparator<Obstaculos> maxComparator(ArrayList<Vertice<Obstaculos>> disponiveis) {
-    //     for(int i = 0; i < disponiveis.size(); i++){
-
-    //     }
-    //     return Comparator.comparing(disponiveis::getName).reversed().thenComparingInt(Obstaculos::getTime);
-    // }
 
     public int minionsAgindo(int quantidadeDeMinions) {
         int tempo = 0;
@@ -142,17 +95,13 @@ public class Grafo {
                 }
             }
 
-            // if(disponiveis.size() > (quantidadeDeMinions - workingSize)){
-            //     maxComparator();
-            // }
             removeAllDisponiveis(disponiveis, quantidadeDeMinions, workingSize);
 
             sort4(working);
             if (disponiveis.size() > 0) {
                 sort4(disponiveis);
             }
-            // tempo vai passar
-            // chegou no obstaculo mais rapido
+
             tempo = working.get(0).getDado().getTime();
             aux = working.get(0);
             working.remove(0);
@@ -164,31 +113,10 @@ public class Grafo {
             excluded.add(aux);
             verify(excluded);
 
-            // printVerticesEArestas2();
-            disponiveis = disponiveisSemWorking(working);
-            //sort2(working);
+            disponiveis = disponiveisSemWorking(working);;
         }
-        // deletar a aresta de entrada x que é a aresta de saida de x
-        System.out.println("foiiii");
         return tempoTotal;
 
-    }
-
-    public void minionsNecessarios() {
-        int tempoMaximo = 0;
-        int tempo = 0;
-        int quantidadeDeMinions = 0;
-        for (int i = 30; i <= 100; i++) {
-            tempo = minionsAgindo(i);
-            if (tempo > tempoMaximo) {
-                tempoMaximo = tempo;
-            } else {
-                quantidadeDeMinions = i;
-                break;
-            }
-        }
-        System.out.println("minions: " + quantidadeDeMinions);
-        System.out.println("tempo: " + tempoMaximo);
     }
 
     private void setarTempo(ArrayList<Vertice<Obstaculos>> working, int tempo) {
@@ -291,23 +219,6 @@ public class Grafo {
         return obstaculos;
     }
 
-    // public void printVerticesEArestas2() {
-    //     for (int i = 0; i < vertices.size(); i++) {
-    //         System.out.println("Vertice: " + vertices.get(i).getDado().getName());
-    //         for (int j = 0; j < vertices.get(i).getArestasEntrada().size(); j++) {
-    //             //System.out.println("Arestas de Entrada: "
-    //                    // + vertices.get(i).getArestasEntrada().get(j).getInicio().getDado().getName());
-    //         }
-    //         System.out.println("--");
-    //         for (int j = 0; j < vertices.get(i).getArestasSaida().size(); j++) {
-    //             System.out.println(
-    //                     "Arestas de Saida: " + vertices.get(i).getArestasSaida().get(j).getFim().getDado().getName());
-    //         }
-    //         System.out.println("--------------------");
-    //     }
-    //     System.out.println("---------|||||||||||-----------");
-    // }
-
     public Vertice<Obstaculos> getVerticeByName (String name){
         for(int i = 0; i < vertices.size(); i++){
             if(vertices.get(i).getDado().getName() == name){
@@ -323,7 +234,6 @@ public class Grafo {
             nomes.add(disponiveis.get(i).getDado().getName());
         }
         Collections.sort(nomes);
-        //System.out.println(nomes);
         return nomes;
 
     }

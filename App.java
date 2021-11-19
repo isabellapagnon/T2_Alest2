@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 public class App {
     public static void main(String[] args) {
 
-        Path path = Paths.get("quatro_mil.txt");
+        Path path = Paths.get("oito_enunciado.txt");
         String aux[];
         Grafo grafo = new Grafo();
 
@@ -34,8 +34,7 @@ public class App {
             System.err.format("Erro na leitura do arquivo: ", e);
         }
 
-        System.out.println("tempo: " + grafo.minionsAgindo(79));
-        //grafo.criaListaDeNomes(grafo.getVertices());
+        System.out.println("tempo: " + grafo.minionsAgindo(3));
 
     }
 

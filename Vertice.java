@@ -63,16 +63,4 @@ public class Vertice<Obstaculos> {
 
     }
 
-    public void printArestasEntrada(){
-        for(int i = 0; i<arestasEntrada.size(); i++){
-            System.out.println(arestasEntrada.get(i).getInicio().getDado());
-        }
-    }
-
-    public void printArestasSaida(){
-        for(int i = 0; i<arestasSaida.size(); i++){
-            System.out.println(arestasSaida.get(i).getFim().getDado());
-        }
-    }
-
 }
